@@ -5,12 +5,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Books</title>
+  <title>Lista Książek</title>
 </head>
 
 <body>
-  <div></div>
-  <footer>By me</footer>
+  <div class="container">
+    <div class=""></div>
+    <h1>Lista dostępnych książek</h1>
+    <form class="add_book_form">
+      <div>
+        <label for="title">Tytuł</label>
+        <input type="text" id="title">
+      </div>
+      <div>
+        <label for="author">Autor</label>
+        <input type="text" id="author">
+      </div>
+      <div>
+        <label for="book_number">Numer książki</label>
+        <input type="text" id="book_number">
+      </div>
+      <div>
+        <input type="submit" value="Dodaj" class="submit_btn">
+      </div>
+    </form>
+  </div>
+  <div class="books">
+    <div class="nav_bar">
+      <div>
+        <p>Title</p>
+      </div>
+      <div>
+        <p>Autor</p>
+      </div>
+      <div>
+        <p>Rok</p>
+      </div>
+      <div>
+        <p>Numer ISBN</p>
+      </div>
+    </div>
+  </div>
+  <div class="book_list"></div>
+  <footer>Jarosław Sochacki</footer>
+  <source src="../public/js/app.js" type="">
 </body>
 
 </html>
