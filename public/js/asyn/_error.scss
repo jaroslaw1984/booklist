@@ -1,0 +1,12 @@
+$border_color: rgba(100, 100, 100, 0.5);
+
+.error {
+  width: 50%;
+  padding: 30px;
+  text-align: center;
+  border: 2px solid $border_color;
+  border-radius: 10px;
+  background-color: brown;
+  color: white;
+  transition: all 0.3s ease-in;
+}
