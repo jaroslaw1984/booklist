@@ -6,7 +6,7 @@ function throwError(message) {
 
   h3.className = "error";
   h3.appendChild(document.createTextNode(message));
-  bookList.appendChild(h3);
+  bookList.before(h3);
 }
 
 export default throwError;

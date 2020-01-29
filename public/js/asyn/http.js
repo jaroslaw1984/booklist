@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * This class is for fetching a data from url that is pass in a class methods.
+ * This class contains methods GET, POST , DELETE, PUT for handling json server data
  *
  */
 
@@ -22,6 +22,19 @@ export class RequestHTTP {
           "Content-type": "application/json"
         },
         body: JSON.stringify(data)
+      })
+        .then(request => request.json())
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+    });
+  }
+  del(url) {
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json"
+        }
       })
         .then(request => request.json())
         .then(data => resolve(data))

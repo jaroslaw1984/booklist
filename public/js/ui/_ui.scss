@@ -4,11 +4,15 @@ $border_color: rgba(100, 100, 100, 0.5);
   display: grid;
   place-items: center;
 }
+
 .add_book_form {
   display: grid;
   grid-template-columns: 1fr;
 }
 
+.content {
+  transition: all 0.3s ease;
+}
 label {
   display: block;
   margin: 5px;

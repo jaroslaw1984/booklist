@@ -8,55 +8,73 @@ export default class Form {
     this.yearInput = document.getElementById("year");
     this.numberInput = document.getElementById("book_number");
     this.submitBtn = document.querySelector(".submit_btn");
+    this.alert = document.querySelector(".alert");
   }
   showBooks(books) {
     let list = "";
 
     books.forEach(book => {
-      // list += `
-      // <div class="content">
-      //   <div class="body">
-      //     <h4>${book.title}</h4>
-      //     <p>${book.author} <span>(${book.year})</span></p>
-      //     <p>ISBN ${book.number}</p>
-      //     <a href="#" class="delete" data-id="${book.id}">
-      //       <i class="far fa-trash-alt"></i>
-      //     </a>
-      //     <a href="#" class="edit" data-id="${book.id}">
-      //       <i class="fas fa-pencil-alt"></i>
-      //     </a>
-      //   </div>
-      // </div>
-      //   `;
-      const divContent = document.createElement("div");
-      const divBody = document.createElement("div");
-      const h4 = document.createElement("h4");
-      const pAuthor = document.createElement("p");
-      const pISBN = document.createElement("p");
-      const span = document.createElement("span");
-      const aDelete = document.createElement("a");
-      const aEdit = document.createElement("a");
-
-      divContent.className = "content";
-      divBody.className = "body";
-
-      divContent.appendChild(divBody);
-      divBody.appendChild(h4, pAuthor, pISBN, aDelete, aEdit);
-      pAuthor.appendChild(span);
-
-      h4.appendChild(document.createTextNode(book.year));
-      pAuthor.appendChild(document.createTextNode(book.author));
+      list += `
+      <div class="content">
+        <div class="body">
+          <h4>${book.title}</h4>
+          <p>${book.author} <span>(${book.year})</span></p>
+          <p>Numer ISBN: ${book.number}</p>
+          <a href="#" class="delete" data-id="${book.id}">
+            <i class="far fa-trash-alt"></i>
+          </a>
+          <a href="#" class="edit" data-id="${book.id}">
+            <i class="fas fa-pencil-alt"></i>
+          </a>
+        </div>
+      </div>
+        `;
     });
 
-    this.bookList.insertAdjacentHTML("beforeend", list);
+    // this.bookList.insertAdjacentHTML("afterbegin", list);
+    this.bookList.innerHTML = list;
   }
 
-  alerts(message, className) {}
+  // Show alert if book is added, delete or modify
+  alerts(message, className) {
+    this.dbclick;
+    const span = document.createElement("span");
+    const attention = `<i class="fas fa-exclamation-triangle"></i>`;
+    const check = `<i class="fas fa-check"></i>`;
+
+    span.appendChild(document.createTextNode(message));
+
+    this.alert.innerHTML += className === "attention" ? attention : check;
+    this.alert.appendChild(span);
+
+    setTimeout(() => {
+      this.alert.classList = `alert ${className}`;
+    }, 500);
+    setTimeout(() => {
+      this.alert.classList = "alert hide";
+    }, 4000);
+    setTimeout(() => {
+      span.parentNode.removeChild(span);
+      this.alert.classList = "alert";
+      this.alert.innerHTML = "";
+    }, 4500);
+  }
 
   clearInputs() {
     this.titleInput.value = "";
     this.authorInput.value = "";
     this.yearInput.value = "";
     this.numberInput.value = "";
+  }
+
+  // prevent for multitime submiting the form
+  dbclick() {
+    this.submitBtn.disabled = true;
+    this.submitBtn.value = "Sprawdzam";
+
+    setTimeout(() => {
+      this.submitBtn.disabled = false;
+      this.submitBtn.value = "Dodaj";
+    }, 4500);
   }
 }
