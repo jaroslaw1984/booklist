@@ -2,13 +2,14 @@
 
 export default class Form {
   constructor() {
-    this.bookList = document.querySelector(".book_list");
+    this.bookList = document.querySelector("#books");
     this.titleInput = document.getElementById("title");
     this.authorInput = document.getElementById("author");
     this.yearInput = document.getElementById("year");
     this.numberInput = document.getElementById("book_number");
     this.submitBtn = document.querySelector(".submit_btn");
     this.alert = document.querySelector(".alert");
+    this.idInput = document.getElementById("id");
   }
   showBooks(books) {
     let list = "";
@@ -17,13 +18,14 @@ export default class Form {
       list += `
       <div class="content">
         <div class="body">
-          <h4>${book.title}</h4>
-          <p>${book.author} <span>(${book.year})</span></p>
-          <p>Numer ISBN: ${book.number}</p>
-          <a href="#" class="delete" data-id="${book.id}">
+          <h2>${book.title}</h4>
+          <h4>${book.author}</h4> 
+          <p>(<span>${book.year}</span>)</p>
+          <p>Number ISBN: <span>${book.number}</span></p>
+          <a href="#" class="delete" title="Delete" data-id="${book.id}">
             <i class="far fa-trash-alt"></i>
           </a>
-          <a href="#" class="edit" data-id="${book.id}">
+          <a href="#" class="edit" title="Edit" data-id="${book.id}">
             <i class="fas fa-pencil-alt"></i>
           </a>
         </div>
@@ -31,7 +33,6 @@ export default class Form {
         `;
     });
 
-    // this.bookList.insertAdjacentHTML("afterbegin", list);
     this.bookList.innerHTML = list;
   }
 
@@ -60,6 +61,7 @@ export default class Form {
     }, 4500);
   }
 
+  // clear input fields form when book is added
   clearInputs() {
     this.titleInput.value = "";
     this.authorInput.value = "";
@@ -70,11 +72,20 @@ export default class Form {
   // prevent for multitime submiting the form
   dbclick() {
     this.submitBtn.disabled = true;
-    this.submitBtn.value = "Sprawdzam";
+    this.submitBtn.value = "Checking";
 
     setTimeout(() => {
       this.submitBtn.disabled = false;
-      this.submitBtn.value = "Dodaj";
+      this.submitBtn.value = "Add Book";
     }, 4500);
+  }
+
+  // get data about book title, author, year and ISBN number
+  getData(data) {
+    this.titleInput.value = data.title;
+    this.authorInput.value = data.author;
+    this.yearInput.value = data.year;
+    this.numberInput.value = data.isbn;
+    this.idInput.value = data.dataId;
   }
 }

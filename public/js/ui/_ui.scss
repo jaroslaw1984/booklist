@@ -26,7 +26,7 @@ input {
   border: 2px solid $border_color;
 }
 
-.books {
+.navBar {
   max-width: 100%;
   min-height: 5vh;
   border: 2px solid $border_color;
@@ -59,7 +59,7 @@ footer {
   border-radius: 10px;
 }
 
-.book_list {
+#books {
   display: flex;
   flex-direction: column;
   justify-content: center;
