@@ -1,11 +1,11 @@
 {
   "books": [
     {
-      "id": 1,
       "title": "The Institute",
       "author": "Stephen King",
       "year": "2019",
-      "number": 1
+      "number": "123",
+      "id": 1
     },
     {
       "id": 2,
@@ -27,13 +27,6 @@
       "year": "2017",
       "number": "3",
       "id": 4
-    },
-    {
-      "title": "asdas",
-      "author": "asdasd",
-      "year": "345",
-      "number": "345345",
-      "id": 5
     }
   ]
 }

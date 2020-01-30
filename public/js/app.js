@@ -15,11 +15,11 @@ const localhost = "http://localhost:3000/books";
   // DOM load
   document.addEventListener("DOMContentLoaded", getBooks);
 
-  // add book
+  // submit by adding book
   const subBtn = document.querySelector(".submit_btn");
   subBtn.addEventListener("click", addBook);
 
-  // delete a book
+  // delete a book. Check the function on what is listener is set it.
   const delBtn = document.getElementById("books");
   delBtn.addEventListener("click", deleteBook);
 
@@ -27,6 +27,16 @@ const localhost = "http://localhost:3000/books";
   const editBtn = document.getElementById("books");
   editBtn.addEventListener("click", editBook);
 })();
+
+// function check if cancel button is active while editing
+function listenCancelBtn() {
+  const cancelBtn = document.querySelector("input.cancel");
+  // if cancel btn is present then start listent
+  if (cancelBtn) {
+    // listent cancel btn
+    cancelBtn.addEventListener("click", cancelEdit);
+  }
+}
 
 // Request to get a books from a json server
 function getBooks() {
@@ -48,6 +58,7 @@ function addBook(e) {
   const author = document.getElementById("author").value;
   const year = document.getElementById("year").value;
   const number = document.getElementById("book_number").value;
+  const id = document.getElementById("id").value;
 
   // passing all values to the data object
   const data = {
@@ -62,21 +73,44 @@ function addBook(e) {
     ui.alerts(" Some field are empty! ", "attention");
     ui.dbclick();
   } else {
-    // adding a book when validation pass
-    http
-      .post(localhost, data)
-      .then(() => {
-        // showing a popup that book is added
-        ui.alerts(`Book "${title}" is added`, "success");
-        // clears the field after book is added
-        ui.clearInputs();
-        // geting added books
-        getBooks();
-      })
-      .catch(error =>
-        // when connection faild with json server
-        throwError(`Something went wrong! \n Error information: ${error}`)
-      );
+    // check if input has any value
+    if (id === "") {
+      // if it is create a new book
+      http
+        .post(localhost, data)
+        .then(() => {
+          // showing a popup that book is added
+          ui.alerts(`Book "${title}" is added`, "success");
+
+          // clears the field after book is added
+          ui.clearInputs();
+
+          // geting added books
+          getBooks();
+        })
+        .catch(error =>
+          // when connection faild with json server
+          throwError(`Something went wrong! \n Error information: ${error}`)
+        );
+    } else {
+      // if value is not empty start put request
+      http
+        .put(localhost + "/" + id, data)
+        .then(() => {
+          // showing a popup that book is added
+          ui.alerts(`Book "${title}" is update`, "attention");
+
+          // initial method with attribute "add" that will remove cancel btn and change button value to the orginal state also it will clear the fields.
+          ui.changeState("add");
+
+          // geting added books
+          getBooks();
+        })
+        .catch(error =>
+          // when connection faild with json server
+          throwError(`Something went wrong! \n Error information: ${error}`)
+        );
+    }
   }
 }
 
@@ -84,7 +118,9 @@ function addBook(e) {
 function deleteBook(e) {
   e.preventDefault();
 
+  // if event is clicked on icon but condition must contains a delete class.
   const delBtn = e.target.parentElement.classList.contains("delete");
+  // getting dataset from attribute metadata data-id
   const dataId = e.target.parentElement.dataset.id;
 
   if (delBtn) {
@@ -111,23 +147,23 @@ function editBook(e) {
     // pass element id
     const dataId = e.target.parentElement.dataset.id;
 
-    // select title text from a book
+    // select title text from a HTML
     const title =
       e.target.parentElement.previousElementSibling.previousElementSibling
         .previousElementSibling.previousElementSibling.previousElementSibling
         .textContent;
 
-    // select author text from a book
+    // select author text from a HTML
     const author =
       e.target.parentElement.previousElementSibling.previousElementSibling
         .previousElementSibling.previousElementSibling.textContent;
 
-    // select year text from a book
+    // select year text from a HTML
     const year = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent.match(
       /\(([^)]+)\)/
     )[1];
 
-    // select isbn number from a book
+    // select isbn number from a HTML
     const isbn = e.target.parentElement.previousElementSibling.previousElementSibling.textContent.match(
       /\d+/
     );
@@ -143,5 +179,17 @@ function editBook(e) {
 
     // function that fills the fields in form, from data object
     ui.getData(data);
+
+    // when pressing on edit button it will start listen
+    listenCancelBtn();
+  }
+}
+// cancel the edit btn
+function cancelEdit(e) {
+  e.preventDefault();
+
+  if (e.target.classList.contains("cancel")) {
+    // initial method with attribute "add" that will remove cancel btn and change button value to the orginal state also it will clear the fields.
+    ui.changeState("add");
   }
 }

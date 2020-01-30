@@ -69,6 +69,11 @@ export default class Form {
     this.numberInput.value = "";
   }
 
+  // clear hidden input field
+  clearHiddenIdField() {
+    this.idInput.value = "";
+  }
+
   // prevent for multitime submiting the form
   dbclick() {
     this.submitBtn.disabled = true;
@@ -80,12 +85,48 @@ export default class Form {
     }, 4500);
   }
 
-  // get data about book title, author, year and ISBN number
+  // get data passed in data attribute about book title, author, year and ISBN number
   getData(data) {
     this.titleInput.value = data.title;
     this.authorInput.value = data.author;
     this.yearInput.value = data.year;
     this.numberInput.value = data.isbn;
     this.idInput.value = data.dataId;
+
+    // initial method with attribute "edit" that will create cancel btn and change button value.
+    this.changeState("edit");
+  }
+
+  changeState(type) {
+    if (type === "edit") {
+      // changes a value when editing a book
+      this.submitBtn.value = "Update book";
+      // remember to create a class that change a update look btn
+      // this.submitBtn.className = "update";
+
+      // Create cancel input btn
+      const cancelBtn = document.createElement("input");
+      cancelBtn.type = "button";
+      cancelBtn.value = "Cancel";
+      cancelBtn.className = "cancel";
+
+      // Insert cancel btn in DOM
+      const div = document.querySelector(".action");
+      div.insertBefore(cancelBtn, this.submitBtn);
+    } else if (type === "add") {
+      // Remove cancel btn
+      const cancelBtn = document.querySelector(".cancel");
+
+      // check if cancel button it is there
+      if (cancelBtn) {
+        // back to orginal form
+        this.submitBtn.value = "Add Book";
+        // remember to create a class that change a update look btn
+        // this.submitBtn.className = "update";
+        cancelBtn.remove();
+        this.clearInputs();
+        this.clearHiddenIdField();
+      }
+    }
   }
 }
