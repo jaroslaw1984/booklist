@@ -1,11 +1,15 @@
+"use strict";
+
 import "../sass/index.scss";
 import { RequestHTTP } from "./asyn/http";
 import Ui from "./ui/ui";
 import throwError from "./asyn/error";
+import Validate from "./form_valid/form_valid";
 
 // Global variables
 const ui = new Ui();
 const http = new RequestHTTP();
+const validate = new Validate();
 
 // localhost address for json server
 const localhost = "http://localhost:3000/books";
@@ -15,10 +19,19 @@ const localhost = "http://localhost:3000/books";
   // DOM load
   document.addEventListener("DOMContentLoaded", getBooks);
 
-  // submit by adding book
-  const subBtn = document.querySelector(".submit_btn");
-  subBtn.addEventListener("click", addBook);
+  // listener for a btn to show form
+  const showFormBtn = document.getElementById("add_book");
+  showFormBtn.addEventListener("click", showForm);
 
+  // check if submit_btn exist, if so start listen
+  if (document.querySelector(".submit_btn")) {
+    // submit by adding book
+    const subBtn = document.querySelector(".submit_btn");
+    subBtn.addEventListener("click", addBook);
+
+    // form validation
+    checkFormValid();
+  }
   // delete a book. Check the function on what is listener is set it.
   const delBtn = document.getElementById("books");
   delBtn.addEventListener("click", deleteBook);
@@ -27,6 +40,20 @@ const localhost = "http://localhost:3000/books";
   const editBtn = document.getElementById("books");
   editBtn.addEventListener("click", editBook);
 })();
+
+// show form to add a new book by pressing plus
+function showForm() {
+  const wrapper = document.querySelector(".wrapper");
+
+  // adding class to active form
+  wrapper.className += " show";
+  ui.closeForm("close");
+}
+
+// check form validation
+function checkFormValid() {
+  return validate.validate();
+}
 
 // function check if cancel button is active while editing
 function listenCancelBtn() {
@@ -67,7 +94,7 @@ function addBook(e) {
     year,
     number
   };
-
+  checkFormValid();
   // prevent to adding empty value to data
   if (title === "" || author === "" || year === "" || number === "") {
     ui.alerts(" Some field are empty! ", "attention");
@@ -81,6 +108,8 @@ function addBook(e) {
         .then(() => {
           // showing a popup that book is added
           ui.alerts(`Book "${title}" is added`, "success");
+
+          ui.closeForm("submit_btn");
 
           // clears the field after book is added
           ui.clearInputs();
@@ -144,6 +173,9 @@ function editBook(e) {
   const editBtn = e.target.parentElement.classList.contains("edit");
 
   if (editBtn) {
+    // run form
+    showForm();
+
     // pass element id
     const dataId = e.target.parentElement.dataset.id;
 
@@ -191,5 +223,7 @@ function cancelEdit(e) {
   if (e.target.classList.contains("cancel")) {
     // initial method with attribute "add" that will remove cancel btn and change button value to the orginal state also it will clear the fields.
     ui.changeState("add");
+    ui.alerts("Editing was cancel", "attention");
+    ui.closeForm("cancel");
   }
 }

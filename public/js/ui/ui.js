@@ -45,6 +45,7 @@ export default class Form {
 
     span.appendChild(document.createTextNode(message));
 
+    // it checks is alert contains attention class name
     this.alert.innerHTML += className === "attention" ? attention : check;
     this.alert.appendChild(span);
 
@@ -72,6 +73,22 @@ export default class Form {
   // clear hidden input field
   clearHiddenIdField() {
     this.idInput.value = "";
+  }
+
+  // close form
+  closeForm(selectClass) {
+    let select = document.querySelector(`.${selectClass}`);
+    const wrapper = document.querySelector(".wrapper");
+
+    console.log(select);
+
+    select.addEventListener("click", () => {
+      const check = wrapper.classList.contains("show");
+      console.log(check);
+      if (check) {
+        wrapper.classList.remove("show");
+      }
+    });
   }
 
   // prevent for multitime submiting the form
