@@ -30,6 +30,12 @@ export default class Validate {
     this.year.addEventListener("input", validateYear);
     this.number.addEventListener("input", validateIsbn);
 
+    // check if all inputs are correct filled
+    let titleValid = false;
+    let authorValid = false;
+    let yearValid = false;
+    let isbnValid = false;
+
     function validateTitle() {
       const validTitle = document.getElementById("validTitle");
 
@@ -37,20 +43,19 @@ export default class Validate {
         if (/\d/.test(title.value)) {
           validTitle.innerHTML = "The numbers are not allowed here.";
           submitBtn.disabled = true;
-          console.log("nie przeszedłem");
+          titleValid = false;
           return;
         } else {
           validTitle.innerHTML =
             "The title is too short, it must contain at least two letters";
           submitBtn.disabled = true;
-          console.log("nie przeszedłem");
+          titleValid = false;
           return;
         }
       } else {
         validTitle.innerHTML = "";
-        submitBtn.disabled = false;
-        console.log("przeszedłem");
-        return;
+        titleValid = true;
+        checkFields();
       }
     }
 
@@ -61,17 +66,19 @@ export default class Validate {
         if (/\d/.test(author.value)) {
           validAuthor.innerHTML = "The numbers are not allowed here.";
           submitBtn.disabled = true;
+          authorValid = false;
           return false;
         } else {
           validAuthor.innerHTML =
             " The title is too short, it must contain at least two letters";
           submitBtn.disabled = true;
+          authorValid = false;
           return false;
         }
       } else {
         validAuthor.innerHTML = "";
-        submitBtn.disabled = false;
-        return true;
+        authorValid = true;
+        checkFields();
       }
     }
 
@@ -82,16 +89,18 @@ export default class Validate {
         if (/^[a-zA-Z]/.test(year.value)) {
           validYear.innerHTML = "Letters are not allowed here.";
           submitBtn.disabled = true;
+          yearValid = false;
           return false;
         } else {
           validYear.innerHTML = "You enter wrong year. For example '1984'";
           submitBtn.disabled = true;
+          yearValid = false;
           return false;
         }
       } else {
         validYear.innerHTML = "";
-        submitBtn.disabled = false;
-        return true;
+        yearValid = true;
+        checkFields();
       }
     }
 
@@ -102,16 +111,24 @@ export default class Validate {
         if (/^[a-zA-Z]/.test(isbn.value)) {
           validIsbn.innerHTML = "Letters are not allowed here.";
           submitBtn.disabled = true;
+          isbnValid = false;
           return false;
         } else {
           validIsbn.innerHTML = "You enter wrong ISBN number";
           submitBtn.disabled = true;
+          isbnValid = false;
           return false;
         }
       } else {
         validIsbn.innerHTML = "";
+        isbnValid = true;
+        checkFields();
+      }
+    }
+
+    function checkFields() {
+      if (titleValid && authorValid && yearValid && isbnValid) {
         submitBtn.disabled = false;
-        return true;
       }
     }
   }

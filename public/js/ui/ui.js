@@ -10,6 +10,7 @@ export default class Form {
     this.submitBtn = document.querySelector(".submit_btn");
     this.alert = document.querySelector(".alert");
     this.idInput = document.getElementById("id");
+    this.wrapper = document.querySelector(".wrapper");
   }
   showBooks(books) {
     let list = "";
@@ -75,20 +76,10 @@ export default class Form {
     this.idInput.value = "";
   }
 
-  // close form
-  closeForm(selectClass) {
-    let select = document.querySelector(`.${selectClass}`);
-    const wrapper = document.querySelector(".wrapper");
-
-    console.log(select);
-
-    select.addEventListener("click", () => {
-      const check = wrapper.classList.contains("show");
-      console.log(check);
-      if (check) {
-        wrapper.classList.remove("show");
-      }
-    });
+  // close form by removing a class name "show"
+  closeForm() {
+    // remove class that close form when pressing cancel btn
+    this.wrapper.classList.remove("show");
   }
 
   // prevent for multitime submiting the form
@@ -121,6 +112,9 @@ export default class Form {
       // remember to create a class that change a update look btn
       // this.submitBtn.className = "update";
 
+      // check if cancel btn exist it prevent to create again
+      if (document.querySelector(".cancel")) return;
+
       // Create cancel input btn
       const cancelBtn = document.createElement("input");
       cancelBtn.type = "button";
@@ -138,10 +132,20 @@ export default class Form {
       if (cancelBtn) {
         // back to orginal form
         this.submitBtn.value = "Add Book";
+
         // remember to create a class that change a update look btn
         // this.submitBtn.className = "update";
+
+        // close form
+        this.closeForm();
+
+        //it will remove cancel btn
         cancelBtn.remove();
+
+        // clear inputs fields
         this.clearInputs();
+
+        // clear hiddend id field
         this.clearHiddenIdField();
       }
     }

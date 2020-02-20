@@ -44,10 +44,21 @@ const localhost = "http://localhost:3000/books";
 // show form to add a new book by pressing plus
 function showForm() {
   const wrapper = document.querySelector(".wrapper");
+  let closeBtn = document.querySelector(".close");
 
   // adding class to active form
   wrapper.className += " show";
-  ui.closeForm("close");
+
+  // start listen on close from btn when form will be open
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      const check = wrapper.classList.contains("show");
+      if (check) {
+        wrapper.classList.remove("show");
+        ui.clearInputs();
+      }
+    });
+  }
 }
 
 // check form validation
@@ -70,6 +81,7 @@ function getBooks() {
   http
     .get(localhost)
     .then(data => ui.showBooks(data))
+    // ok let's check if json file is empty by getting data to array or object and see if data have some length. Need that to show if any book is in data.
     .catch(error => {
       throwError(
         `Can not connect to the json:server. Make sure you have run npm run json:server at console! \n  Error information: ${error}`
@@ -97,7 +109,7 @@ function addBook(e) {
   checkFormValid();
   // prevent to adding empty value to data
   if (title === "" || author === "" || year === "" || number === "") {
-    ui.alerts(" Some field are empty! ", "attention");
+    ui.alerts(" You can not add empty fileds! ", "attention");
     ui.dbclick();
   } else {
     // check if input has any value
@@ -109,7 +121,8 @@ function addBook(e) {
           // showing a popup that book is added
           ui.alerts(`Book "${title}" is added`, "success");
 
-          ui.closeForm("submit_btn");
+          // close form after adding a book
+          ui.closeForm();
 
           // clears the field after book is added
           ui.clearInputs();
@@ -176,6 +189,8 @@ function editBook(e) {
     // run form
     showForm();
 
+    ui.clearHiddenIdField();
+
     // pass element id
     const dataId = e.target.parentElement.dataset.id;
 
@@ -224,6 +239,6 @@ function cancelEdit(e) {
     // initial method with attribute "add" that will remove cancel btn and change button value to the orginal state also it will clear the fields.
     ui.changeState("add");
     ui.alerts("Editing was cancel", "attention");
-    ui.closeForm("cancel");
+    // ui.closeForm("cancel");
   }
 }
