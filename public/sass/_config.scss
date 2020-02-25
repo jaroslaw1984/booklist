@@ -1,0 +1,78 @@
+// -------- Settings -------
+
+$colors: (
+  border: #fff,
+  background: #1d1d1d,
+  primary: #6ac045,
+  light: #fff,
+  book_title: #fff,
+  book_author: #fff,
+  book_year: gray,
+  book_icons: #6ac045,
+  footer_color_text: #fff,
+  footer_background: #171717,
+  form_container: #171717,
+  form_text: #fff
+);
+
+$book_config: (
+  book_border: 5px
+);
+
+@function colors($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+@function config($config-name) {
+  @return map-get($book_config, $config-name);
+}
+
+$font-stack: "Montserrat", sans-serif;
+
+// -----------------------------------
+
+// ------ mixin for responsive breakpoints -----
+
+// desktop > 480px
+$desktop_small: 480px;
+
+@mixin desktop_small {
+  @media (min-width: #{$desktop_small}) {
+    @content;
+  }
+}
+
+// desktop > 576px
+$desktop_medium: 576px;
+
+@mixin desktop_medium {
+  @media (min-width: #{$desktop_medium}) {
+    @content;
+  }
+}
+
+// desktop > 768px
+$desktop_large: 768px;
+
+@mixin desktop_large {
+  @media (min-width: #{$desktop_large}) {
+    @content;
+  }
+}
+
+// desktop > 960px
+$desktop_larger: 992px;
+
+@mixin desktop_larger {
+  @media (min-width: #{$desktop_larger}) {
+    @content;
+  }
+}
+// ---------------------------------------------
+
+// reset
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}

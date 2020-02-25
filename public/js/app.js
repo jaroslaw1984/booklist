@@ -29,6 +29,11 @@ const localhost = "http://localhost:3000/books";
     const subBtn = document.querySelector(".submit_btn");
     subBtn.addEventListener("click", addBook);
 
+    // set date at footer
+    const footer = document.querySelector("#footer > p");
+    const date = new Date().getFullYear();
+    footer.appendChild(document.createTextNode(` ${date}`));
+
     // form validation
     checkFormValid();
   }

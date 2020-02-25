@@ -1,4 +1,5 @@
 "use strict";
+import img from "../../assets/image/no_image.png";
 
 export default class Form {
   constructor() {
@@ -18,17 +19,23 @@ export default class Form {
     books.forEach(book => {
       list += `
       <div class="content">
-        <div class="body">
-          <h2>${book.title}</h4>
-          <h4>${book.author}</h4> 
-          <p>(<span>${book.year}</span>)</p>
-          <p>Number ISBN: <span>${book.number}</span></p>
-          <a href="#" class="delete" title="Delete" data-id="${book.id}">
-            <i class="far fa-trash-alt"></i>
-          </a>
-          <a href="#" class="edit" title="Edit" data-id="${book.id}">
-            <i class="fas fa-pencil-alt"></i>
-          </a>
+        <div class="content__body">
+          <div class="content__body__image">
+            <img srcset="${img} 1x" class="image">
+          </div>
+          <div class="content__body__text">
+            <h1 class="title">${book.title}</h1>
+            <h2 class="author">${book.author}</h2> 
+            <p class="year">(<span>${book.year}</span>)</p>
+            <p class="isbn">Number ISBN: <span>${book.number}</span></p>
+            <div class="icons">
+              <a href="#" class="delete" title="Delete" data-id="${book.id}">
+                <i class="far fa-trash-alt"></i>
+              </a>
+              <a href="#" class="edit" title="Edit" data-id="${book.id}">
+                <i class="fas fa-pencil-alt"></i>
+              </a>
+          </div>  
         </div>
       </div>
         `;
