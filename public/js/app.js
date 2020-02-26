@@ -58,9 +58,18 @@ function showForm() {
   if (closeBtn) {
     closeBtn.addEventListener("click", () => {
       const check = wrapper.classList.contains("show");
+      const cancelBtn = document.querySelector(".cancel");
+      const submitBtn = document.querySelector(".submit_btn");
+
       if (check) {
         wrapper.classList.remove("show");
         ui.clearInputs();
+        // in case pressing close button when editing a book if cancel button exist remove it and return submit name to original value
+        if (cancelBtn) {
+          cancelBtn.remove();
+          submitBtn.value = "Add Book";
+          ui.alerts("Editing was cancel", "attention");
+        }
       }
     });
   }
@@ -201,22 +210,22 @@ function editBook(e) {
 
     // select title text from a HTML
     const title =
-      e.target.parentElement.previousElementSibling.previousElementSibling
+      e.target.parentElement.parentElement.previousElementSibling
         .previousElementSibling.previousElementSibling.previousElementSibling
         .textContent;
 
     // select author text from a HTML
     const author =
-      e.target.parentElement.previousElementSibling.previousElementSibling
+      e.target.parentElement.parentElement.previousElementSibling
         .previousElementSibling.previousElementSibling.textContent;
 
     // select year text from a HTML
-    const year = e.target.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.textContent.match(
+    const year = e.target.parentElement.parentElement.previousElementSibling.previousElementSibling.textContent.match(
       /\(([^)]+)\)/
     )[1];
 
     // select isbn number from a HTML
-    const isbn = e.target.parentElement.previousElementSibling.previousElementSibling.textContent.match(
+    const isbn = e.target.parentElement.parentElement.previousElementSibling.textContent.match(
       /\d+/
     );
 

@@ -5,7 +5,7 @@ html,
 body {
   font-family: $font-stack;
   background-color: colors(background);
-  min-height: 100%;
+  min-height: 100vh;
 
   .container {
     // header section
@@ -111,26 +111,50 @@ body {
     // books container
     #books {
       display: flex;
+      flex-direction: column;
       justify-content: center;
+      @include desktop_larger {
+        display: grid;
+        grid-template-columns: 40% 40%;
+        grid-column-gap: 1rem;
+      }
+      @include desktop_extra_large {
+        grid-template-columns: repeat(4, 1fr);
+      }
       .content {
         // inside body book container
+        @include desktop_larger {
+          display: grid;
+          justify-content: center;
+        }
         margin-top: 20px;
         .content__body {
           height: auto;
           display: flex;
           border: config(book_border) solid colors(border);
           border-radius: 10px;
-          // book title
+          // it change the direction of body content at 992px
+          @include desktop_larger {
+            flex-direction: column;
+            max-width: 450px;
+          }
           .content__body__image {
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 10px;
             width: 80%;
+            @include desktop_larger {
+              flex-direction: column;
+              align-self: center;
+            }
             .image {
               width: 100%;
-              @include desktop_large() {
+              @include desktop_large {
                 max-width: 350px;
+              }
+              @include desktop_larger {
+                width: 350px;
               }
             }
           }
@@ -138,10 +162,13 @@ body {
             width: 100%;
             display: flex;
             flex-direction: column;
-            margin: 10px 10px 0 10px;
+            padding: 10px 15px 0 15px;
             text-align: right;
             @include desktop_large() {
               justify-content: center;
+            }
+            @include desktop_larger {
+              align-items: center;
             }
             & h1.title {
               font-size: 1.3rem;
@@ -151,6 +178,10 @@ body {
               }
               @include desktop_medium {
                 font-size: 2.5rem;
+              }
+              @include desktop_larger {
+                text-align: center;
+                font-size: 2.3rem;
               }
             }
             // book author
@@ -162,7 +193,10 @@ body {
                 font-size: 1.3rem;
               }
               @include desktop_medium {
-                font-size: 1.8rem;
+                font-size: 1.7rem;
+              }
+              @include desktop_medium {
+                font-size: 1.5rem;
               }
             }
             // book year and isbn number

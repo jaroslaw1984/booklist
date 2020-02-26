@@ -3,7 +3,7 @@ import img from "../../assets/image/no_image.png";
 
 export default class Form {
   constructor() {
-    this.bookList = document.querySelector("#books");
+    this.bookList = document.getElementById("books");
     this.titleInput = document.getElementById("title");
     this.authorInput = document.getElementById("author");
     this.yearInput = document.getElementById("year");
@@ -35,6 +35,7 @@ export default class Form {
               <a href="#" class="edit" title="Edit" data-id="${book.id}">
                 <i class="fas fa-pencil-alt"></i>
               </a>
+            </div>  
           </div>  
         </div>
       </div>

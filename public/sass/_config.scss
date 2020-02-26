@@ -9,6 +9,7 @@ $colors: (
   book_author: #fff,
   book_year: gray,
   book_icons: #6ac045,
+  book_icons_hover: lighten(#6ac045, 20%),
   footer_color_text: #fff,
   footer_background: #171717,
   form_container: #171717,
@@ -68,11 +69,13 @@ $desktop_larger: 992px;
     @content;
   }
 }
-// ---------------------------------------------
 
-// reset
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+// desktop extra large > 1200px
+$desktop_extra_large: 1200px;
+
+@mixin desktop_extra_large {
+  @media (min-width: #{$desktop_extra_large}) {
+    @content;
+  }
 }
+// ---------------------------------------------
