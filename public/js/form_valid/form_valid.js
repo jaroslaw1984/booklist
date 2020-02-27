@@ -9,6 +9,12 @@ export default class Validate {
     this.number = document.getElementById("book_number");
     this.submitBtn = document.querySelector(".submit_btn");
 
+    // select warning fileds
+    this.validTitle = document.getElementById("validTitle");
+    this.validAuthor = document.getElementById("validAuthor");
+    this.validYear = document.getElementById("validYear");
+    this.validIsbn = document.getElementById("validIsbn");
+
     // select block of current form
     this.bookFormTitle = document.querySelector(".book__form__title");
     this.bookFormAuthor = document.querySelector(".book__form__author");
@@ -39,22 +45,27 @@ export default class Validate {
     function validateTitle() {
       const validTitle = document.getElementById("validTitle");
 
+      // regular expresion validation
       if (!/^[a-zA-Z]{2,}/.test(title.value)) {
+        // check if any number are typed
         if (/\d/.test(title.value)) {
           validTitle.innerHTML = "The numbers are not allowed here.";
           submitBtn.disabled = true;
+          submitBtn.classList.add("disabled");
           titleValid = false;
           return;
         } else {
           validTitle.innerHTML =
             "The title is too short, it must contain at least two letters";
           submitBtn.disabled = true;
+          submitBtn.classList.add("disabled");
           titleValid = false;
           return;
         }
       } else {
         validTitle.innerHTML = "";
         titleValid = true;
+        submitBtn.classList.add("disabled");
         checkFields();
       }
     }
@@ -66,17 +77,20 @@ export default class Validate {
         if (/\d/.test(author.value)) {
           validAuthor.innerHTML = "The numbers are not allowed here.";
           submitBtn.disabled = true;
+          submitBtn.classList.add("disabled");
           authorValid = false;
           return false;
         } else {
           validAuthor.innerHTML =
             " The title is too short, it must contain at least two letters";
           submitBtn.disabled = true;
+          submitBtn.classList.add("disabled");
           authorValid = false;
           return false;
         }
       } else {
         validAuthor.innerHTML = "";
+        submitBtn.classList.add("disabled");
         authorValid = true;
         checkFields();
       }
@@ -89,16 +103,19 @@ export default class Validate {
         if (/^[a-zA-Z]/.test(year.value)) {
           validYear.innerHTML = "Letters are not allowed here.";
           submitBtn.disabled = true;
+          submitBtn.classList.add("disabled");
           yearValid = false;
           return false;
         } else {
           validYear.innerHTML = "You enter wrong year. For example '1984'";
           submitBtn.disabled = true;
+          submitBtn.classList.add("disabled");
           yearValid = false;
           return false;
         }
       } else {
         validYear.innerHTML = "";
+        submitBtn.classList.add("disabled");
         yearValid = true;
         checkFields();
       }
@@ -111,16 +128,19 @@ export default class Validate {
         if (/^[a-zA-Z]/.test(isbn.value)) {
           validIsbn.innerHTML = "Letters are not allowed here.";
           submitBtn.disabled = true;
+          submitBtn.classList.add("disabled");
           isbnValid = false;
           return false;
         } else {
           validIsbn.innerHTML = "You enter wrong ISBN number";
           submitBtn.disabled = true;
+          submitBtn.classList.add("disabled");
           isbnValid = false;
           return false;
         }
       } else {
         validIsbn.innerHTML = "";
+        submitBtn.classList.add("disabled");
         isbnValid = true;
         checkFields();
       }
@@ -129,7 +149,14 @@ export default class Validate {
     function checkFields() {
       if (titleValid && authorValid && yearValid && isbnValid) {
         submitBtn.disabled = false;
+        submitBtn.classList.remove("disabled");
       }
     }
+  }
+  clearValidFields() {
+    this.validTitle.innerHTML = "";
+    this.validAuthor.innerHTML = "";
+    this.validYear.innerHTML = "";
+    this.validIsbn.innerHTML = "";
   }
 }

@@ -3,8 +3,8 @@
 $colors: (
   border: #fff,
   background: #1d1d1d,
-  primary: #6ac045,
   light: #fff,
+  header_page: #6ac045,
   book_title: #fff,
   book_author: #fff,
   book_year: gray,
@@ -12,8 +12,20 @@ $colors: (
   book_icons_hover: lighten(#6ac045, 20%),
   footer_color_text: #fff,
   footer_background: #171717,
+  book_form_show: #6ac045,
   form_container: #171717,
-  form_text: #fff
+  form_text: #fff,
+  form_close_button: #6ac045,
+  input_header: gray,
+  input_text: #fff,
+  input_background: #171717,
+  input_border: #6ac045,
+  submit_btn_background: #6ac045,
+  submit_btn_hover: lighten(#6ac045, 10%),
+  cancel_btn_background: #6ac045,
+  cancel_btn_hover: lighten(#6ac045, 10%),
+  validation_warning_text: #d82525,
+  attention_background: #6ac045
 );
 
 $book_config: (

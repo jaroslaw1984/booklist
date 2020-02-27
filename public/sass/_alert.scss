@@ -1,8 +1,7 @@
 //------------ show alert configuration
-$attention_background: rgba(73, 106, 179, 100);
-$attention_icon_color: #f0ad4e;
-$attention_font_color: #fff;
-$success_font: #fff;
+$attention_icon_color: #ffbe5c;
+$attention_font_color: #3584e4;
+$success_font: #3584e4;
 $success_background: #5cb85c;
 
 section {
@@ -11,13 +10,15 @@ section {
     top: -20%;
     left: 50%;
     transform: translate(-50%, 50%);
-    height: 10vh;
+    width: 90%;
+    height: 80px;
     padding: 10px 20px;
     border-radius: 5px;
     transition: all 0.3s ease;
     text-align: center;
-    line-height: 10vh;
-    color: white;
+    color: $success_font;
+    display: flex;
+    align-items: center;
     & i {
       font-size: 1.5rem;
       color: $attention_icon_color;
@@ -31,8 +32,9 @@ section {
   // look of attention alert
   .attention {
     top: 0;
-    background-color: $attention_background;
+    background-color: colors(attention_background);
     color: $attention_font_color;
+    font-weight: 700;
   }
   // look when book is added
   .success {

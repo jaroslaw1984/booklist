@@ -54,6 +54,9 @@ function showForm() {
   // adding class to active form
   wrapper.className += " show";
 
+  // clear warning fields if alert still there
+  validate.clearValidFields();
+
   // start listen on close from btn when form will be open
   if (closeBtn) {
     closeBtn.addEventListener("click", () => {

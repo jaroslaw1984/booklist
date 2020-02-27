@@ -1,0 +1,138 @@
+// section of form
+section {
+  // button that show a form
+  .fa-plus {
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: colors(book_form_show);
+    @include desktop_small {
+      &:hover {
+        transform: scale(0.9);
+      }
+    }
+  }
+  // form container
+  .wrapper {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    // transform: translate(-50%, -50%);
+    height: 100vh;
+    margin: 0 auto;
+    color: colors(form_text);
+    transition: all 0.3s ease-in;
+    // button that close form
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: colors(form_close_button);
+      transition: all 0.3s ease;
+      &:hover {
+        transform: scale(0.9);
+      }
+    }
+    // form styles
+    .book__form {
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: colors(form_container);
+      border-radius: 5px;
+      // form header text
+      .book__form__header {
+        margin: 30px 0;
+      }
+    }
+  }
+  // allow to show book by pressing add button (plus btn icon)
+  .show {
+    display: block;
+  }
+
+  .disabled {
+    background-color: gray !important;
+  }
+  // wrappers of input and label
+  .book__form__title,
+  .book__form__author,
+  .book__form__year,
+  .book__form__isbn {
+    border-bottom: 1px solid colors(input_border);
+    margin-bottom: 20px;
+    display: table;
+    width: 70%;
+    label {
+      display: table-header-group;
+      margin: 5px;
+      font-weight: 900;
+      color: colors(input_header);
+    }
+    input {
+      display: table-row-group;
+      width: 100%;
+      margin: 10px;
+      border-radius: 4px;
+      border: none;
+      font-size: 15px;
+      background-color: colors(input_background);
+      &[type="text"],
+      &:focus {
+        color: colors(input_text);
+        outline: none;
+      }
+      &:focus + label {
+        transition: all 0.3s ease;
+        color: colors(input_text);
+      }
+    }
+    // validation warrnings
+    .warning {
+      display: block;
+      width: 100%;
+      color: colors(validation_warning_text);
+      font-size: 12px;
+      text-align: center;
+      padding: 5px;
+    }
+  }
+  // submit btn
+  .action {
+    display: flex;
+    flex-direction: column;
+    input {
+      &[type="submit"],
+      .cancel[type="button"] {
+        color: colors(input_text);
+        border: 1px solid colors(input_border);
+        border-radius: 0;
+        padding: 10px;
+        margin: 20px 0;
+        background-color: colors(submit_btn_background);
+        transition: all 0.3s ease;
+      }
+      &[type="submit"]:hover {
+        background-color: colors(submit_btn_hover);
+      }
+    }
+    .cancel[type="button"] {
+      color: colors(input_text);
+      border: 1px solid colors(input_border);
+      border-radius: 0;
+      padding: 10px;
+      background-color: colors(cancel_btn_background);
+      transition: all 0.3s ease;
+      &:hover {
+        background-color: colors(cancel_btn_hover);
+      }
+    }
+  }
+}
