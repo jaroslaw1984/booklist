@@ -1,27 +1,24 @@
 //------------ show alert configuration
-$attention_icon_color: #ffbe5c;
-$attention_font_color: #3584e4;
-$success_font: #3584e4;
-$success_background: #5cb85c;
 
 section {
   .alert {
     position: fixed;
-    top: -20%;
+    top: -25%;
     left: 50%;
     transform: translate(-50%, 50%);
     width: 90%;
+    max-width: 300px;
     height: 80px;
     padding: 10px 20px;
     border-radius: 5px;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out;
     text-align: center;
-    color: $success_font;
+    color: colors(success_font_color);
     display: flex;
     align-items: center;
     & i {
       font-size: 1.5rem;
-      color: $attention_icon_color;
+      color: colors(attention_icon_color);
       margin-right: 10px;
     }
     & span {
@@ -33,18 +30,18 @@ section {
   .attention {
     top: 0;
     background-color: colors(attention_background);
-    color: $attention_font_color;
+    color: colors(attention_font_color);
     font-weight: 700;
   }
   // look when book is added
   .success {
     top: 0;
-    background-color: $success_background;
+    background-color: colors(success_background);
   }
 
   // position of alert when is going to hide
   .hide {
-    top: -20%;
+    top: -25%;
     left: 50%;
   }
   // alert content

@@ -158,5 +158,7 @@ export default class Validate {
     this.validAuthor.innerHTML = "";
     this.validYear.innerHTML = "";
     this.validIsbn.innerHTML = "";
+    this.submitBtn.classList.remove("disabled");
+    this.submitBtn.disabled = false;
   }
 }

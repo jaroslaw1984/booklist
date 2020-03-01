@@ -21,11 +21,17 @@ section {
     position: absolute;
     top: 50%;
     left: 0;
-    // transform: translate(-50%, -50%);
-    height: 100vh;
     margin: 0 auto;
     color: colors(form_text);
     transition: all 0.3s ease-in;
+    @include mobile_small {
+      position: fixed;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    @include desktop_small {
+      width: 450px;
+    }
     // button that close form
     .close {
       position: absolute;

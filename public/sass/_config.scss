@@ -25,7 +25,13 @@ $colors: (
   cancel_btn_background: #6ac045,
   cancel_btn_hover: lighten(#6ac045, 10%),
   validation_warning_text: #d82525,
-  attention_background: #6ac045
+  attention_background: #fff,
+  attention_font_color: #171717,
+  attention_icon_color: #6ac045,
+  success_font_color: #171717,
+  success_background: #fff,
+  warning_404_background: #d9534f,
+  warning_404_fontColor: #fff
 );
 
 $book_config: (
@@ -45,6 +51,15 @@ $font-stack: "Montserrat", sans-serif;
 // -----------------------------------
 
 // ------ mixin for responsive breakpoints -----
+
+// mobile > 360px
+$mobile_small: 360px;
+
+@mixin mobile_small {
+  @media (min-width: #{$mobile_small}) {
+    @content;
+  }
+}
 
 // desktop > 480px
 $desktop_small: 480px;

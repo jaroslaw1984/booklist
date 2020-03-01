@@ -97,8 +97,9 @@ function listenCancelBtn() {
 function getBooks() {
   http
     .get(localhost)
-    .then(data => ui.showBooks(data))
-    // ok let's check if json file is empty by getting data to array or object and see if data have some length. Need that to show if any book is in data.
+    // check if json file isn't empty
+    .then(data => (data.length === 0 ? ui.noData() : ui.showBooks(data)))
+
     .catch(error => {
       throwError(
         `Can not connect to the json:server. Make sure you have run npm run json:server at console! \n  Error information: ${error}`

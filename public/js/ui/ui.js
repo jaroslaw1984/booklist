@@ -14,6 +14,9 @@ export default class Form {
     this.wrapper = document.querySelector(".wrapper");
   }
   showBooks(books) {
+    // clean inline styles when styles are added if all data from db.json will be delete.
+    this.bookList.style.cssText = null;
+
     let list = "";
 
     books.forEach(book => {
@@ -47,7 +50,15 @@ export default class Form {
 
   // Show alert if book is added, delete or modify
   alerts(message, className) {
+    // double click secure
     this.dbclick;
+    // check if any other alert is displayed, if so, don't create another one
+    if (
+      this.alert.classList.contains(className) ||
+      this.alert.classList.contains("hide")
+    )
+      return;
+
     const span = document.createElement("span");
     const attention = `<i class="fas fa-exclamation-triangle"></i>`;
     const check = `<i class="fas fa-check"></i>`;
@@ -57,6 +68,7 @@ export default class Form {
     // it checks is alert contains attention class name
     this.alert.innerHTML += className === "attention" ? attention : check;
     this.alert.appendChild(span);
+    // this.alert.classList.add("set");
 
     setTimeout(() => {
       this.alert.classList = `alert ${className}`;
@@ -157,5 +169,20 @@ export default class Form {
         this.clearHiddenIdField();
       }
     }
+  }
+
+  noData() {
+    // cleaning div before create text with empty json file
+    this.bookList.innerHTML = "";
+
+    const h1 = document.createElement("h1");
+    const text = "Sorry, but there are no books to showed. Please add one.";
+
+    h1.appendChild(document.createTextNode(text));
+    h1.classList.add("books__no__data");
+    this.bookList.appendChild(h1);
+    this.bookList.style.display = "flex";
+    this.bookList.style.justifyContent = "center";
+    this.bookList.style.alignItems = "center";
   }
 }
