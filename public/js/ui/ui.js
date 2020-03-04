@@ -12,6 +12,7 @@ export default class Form {
     this.alert = document.querySelector(".alert");
     this.idInput = document.getElementById("id");
     this.wrapper = document.querySelector(".wrapper");
+    this.formTitle = document.querySelector(".book__form__header");
   }
   showBooks(books) {
     // clean inline styles when styles are added if all data from db.json will be delete.
@@ -98,8 +99,18 @@ export default class Form {
 
   // close form by removing a class name "show"
   closeForm() {
+    // select all delete buttons
+    const buttons = document.querySelectorAll(".delete");
+
     // remove class that close form when pressing cancel btn
     this.wrapper.classList.remove("show");
+
+    // restore title form
+    this.formTitle.textContent = "Add new book";
+
+    // when book is editing delete buttons is disabled
+    [...buttons].map(btn => btn.removeAttribute("style"));
+    // remove thos styles to enabled it when form is closed
   }
 
   // prevent for multitime submiting the form
@@ -129,8 +140,9 @@ export default class Form {
     if (type === "edit") {
       // changes a value when editing a book
       this.submitBtn.value = "Update book";
-      // remember to create a class that change a update look btn
-      // this.submitBtn.className = "update";
+
+      // title form for update
+      this.formTitle.textContent = "Edit a book";
 
       // check if cancel btn exist it prevent to create again
       if (document.querySelector(".cancel")) return;
@@ -153,8 +165,8 @@ export default class Form {
         // back to orginal form
         this.submitBtn.value = "Add Book";
 
-        // remember to create a class that change a update look btn
-        // this.submitBtn.className = "update";
+        // restore title form
+        this.formTitle.textContent = "Add new book";
 
         // close form
         this.closeForm();

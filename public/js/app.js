@@ -65,13 +65,17 @@ function showForm() {
       const submitBtn = document.querySelector(".submit_btn");
 
       if (check) {
-        wrapper.classList.remove("show");
+        // wrapper.classList.remove("show");
         ui.clearInputs();
+        ui.clearHiddenIdField();
+        ui.closeForm();
         // in case pressing close button when editing a book if cancel button exist remove it and return submit name to original value
         if (cancelBtn) {
           cancelBtn.remove();
           submitBtn.value = "Add Book";
           ui.alerts("Editing was cancel", "attention");
+          // console.log(buttons);
+          // [...buttons].map(btn => btn.removeAttribute("style"));
         }
       }
     });
@@ -204,10 +208,19 @@ function editBook(e) {
   const editBtn = e.target.parentElement.classList.contains("edit");
 
   if (editBtn) {
+    // get id of delete button of current book
+    const delId = e.target.parentElement.previousElementSibling.dataset.id;
+    // select delete icon of a book that is editing
+    const delBtn = document.querySelector(`[data-id="${delId}"]`);
+
     // run form
     showForm();
 
     ui.clearHiddenIdField();
+
+    delBtn.style.color = "gray";
+    // disable delete button when editing a book
+    delBtn.style.pointerEvents = "none";
 
     // pass element id
     const dataId = e.target.parentElement.dataset.id;
