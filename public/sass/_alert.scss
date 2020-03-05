@@ -5,17 +5,25 @@ section {
     position: fixed;
     top: -25%;
     left: 50%;
+    // display: inline;
     transform: translate(-50%, 50%);
     width: 90%;
-    max-width: 300px;
+    max-width: 350px;
     height: 80px;
     padding: 10px 20px;
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
-    text-align: center;
     color: colors(success_font_color);
     display: flex;
+    text-align: center;
     align-items: center;
+    justify-content: center;
+    @include desktop_small {
+      display: inline;
+      width: auto;
+      height: auto;
+      padding: 20px 20px;
+    }
     & i {
       font-size: 1.5rem;
       color: colors(attention_icon_color);

@@ -141,7 +141,7 @@ function addBook(e) {
         .post(localhost, data)
         .then(() => {
           // showing a popup that book is added
-          ui.alerts(`Book "${title}" is added`, "success");
+          ui.alerts("Book is added", "success");
 
           // close form after adding a book
           ui.closeForm();
@@ -162,7 +162,7 @@ function addBook(e) {
         .put(localhost + "/" + id, data)
         .then(() => {
           // showing a popup that book is added
-          ui.alerts(`Book "${title}" is update`, "attention");
+          ui.alerts("Book is update", "attention");
 
           // initial method with attribute "add" that will remove cancel btn and change button value to the orginal state also it will clear the fields.
           ui.changeState("add");

@@ -15,6 +15,9 @@ export default class Validate {
     this.validYear = document.getElementById("validYear");
     this.validIsbn = document.getElementById("validIsbn");
 
+    // select form container
+    this.wrapper = document.querySelector(".wrapper");
+
     // select block of current form
     this.bookFormTitle = document.querySelector(".book__form__title");
     this.bookFormAuthor = document.querySelector(".book__form__author");
@@ -29,6 +32,7 @@ export default class Validate {
     const submitBtn = this.submitBtn;
     const year = this.year;
     const isbn = this.number;
+    const wrapper = this.wrapper;
 
     // listeners on inputs
     this.title.addEventListener("input", validateTitle);
@@ -41,6 +45,15 @@ export default class Validate {
     let authorValid = false;
     let yearValid = false;
     let isbnValid = false;
+
+    if (this.wrapper.classList.contains("edit")) {
+      titleValid = true;
+      authorValid = true;
+      yearValid = true;
+      isbnValid = true;
+    }
+
+    console.log(titleValid, authorValid, yearValid, isbnValid);
 
     function validateTitle() {
       const validTitle = document.getElementById("validTitle");
@@ -65,7 +78,8 @@ export default class Validate {
       } else {
         validTitle.innerHTML = "";
         titleValid = true;
-        submitBtn.classList.add("disabled");
+        submitBtn.classList.remove("disabled");
+        submitBtn.disabled = false;
         checkFields();
       }
     }
@@ -90,7 +104,8 @@ export default class Validate {
         }
       } else {
         validAuthor.innerHTML = "";
-        submitBtn.classList.add("disabled");
+        submitBtn.classList.remove("disabled");
+        submitBtn.disabled = false;
         authorValid = true;
         checkFields();
       }
@@ -115,7 +130,8 @@ export default class Validate {
         }
       } else {
         validYear.innerHTML = "";
-        submitBtn.classList.add("disabled");
+        submitBtn.classList.remove("disabled");
+        submitBtn.disabled = false;
         yearValid = true;
         checkFields();
       }
@@ -140,7 +156,8 @@ export default class Validate {
         }
       } else {
         validIsbn.innerHTML = "";
-        submitBtn.classList.add("disabled");
+        submitBtn.classList.remove("disabled");
+        submitBtn.disabled = false;
         isbnValid = true;
         checkFields();
       }
@@ -150,6 +167,7 @@ export default class Validate {
       if (titleValid && authorValid && yearValid && isbnValid) {
         submitBtn.disabled = false;
         submitBtn.classList.remove("disabled");
+        console.log(titleValid, authorValid, yearValid, isbnValid);
       }
     }
   }

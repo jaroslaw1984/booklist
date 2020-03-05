@@ -37,18 +37,18 @@ body {
       justify-content: center;
       @include desktop_larger {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(40% 40%));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 40%));
         grid-column-gap: 1rem;
       }
       @include desktop_extra_large {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
       }
       .content {
-        transition: all 0.3s ease;
         // inside body book container
         @include desktop_larger {
           display: grid;
           justify-content: center;
+          grid-template-columns: 0.7fr;
         }
         margin-top: 20px;
         .content__body {
@@ -151,6 +151,7 @@ body {
                 cursor: pointer;
                 transition: all 0.3s ease;
                 @include desktop_small {
+                  margin-right: 52px;
                   &:hover {
                     color: colors(book_icons_hover);
                   }

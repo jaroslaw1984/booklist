@@ -69,7 +69,6 @@ export default class Form {
     // it checks is alert contains attention class name
     this.alert.innerHTML += className === "attention" ? attention : check;
     this.alert.appendChild(span);
-    // this.alert.classList.add("set");
 
     setTimeout(() => {
       this.alert.classList = `alert ${className}`;
@@ -102,15 +101,16 @@ export default class Form {
     // select all delete buttons
     const buttons = document.querySelectorAll(".delete");
 
-    // remove class that close form when pressing cancel btn
+    // remove class's when close form
     this.wrapper.classList.remove("show");
+    this.wrapper.classList.remove("edit");
 
     // restore title form
     this.formTitle.textContent = "Add new book";
 
-    // when book is editing delete buttons is disabled
+    // when book is editing, delete button is disabled
     [...buttons].map(btn => btn.removeAttribute("style"));
-    // remove thos styles to enabled it when form is closed
+    // closed form to restore delete button to enabled
   }
 
   // prevent for multitime submiting the form
@@ -139,6 +139,7 @@ export default class Form {
   changeState(type) {
     if (type === "edit") {
       // changes a value when editing a book
+      this.wrapper.classList.add("edit");
       this.submitBtn.value = "Update book";
 
       // title form for update
