@@ -44,6 +44,12 @@ const localhost = "http://localhost:3000/books";
   // edit a book
   const editBtn = document.getElementById("books");
   editBtn.addEventListener("click", editBook);
+
+  // when sort selection is change it will reload the json data
+  const sort = document.getElementById("sort");
+  sort.addEventListener("change", () => {
+    getBooks();
+  });
 })();
 
 // show form to add a new book by pressing plus
@@ -74,8 +80,6 @@ function showForm() {
           cancelBtn.remove();
           submitBtn.value = "Add Book";
           ui.alerts("Editing was cancel", "attention");
-          // console.log(buttons);
-          // [...buttons].map(btn => btn.removeAttribute("style"));
         }
       }
     });
@@ -120,13 +124,15 @@ function addBook(e) {
   const year = document.getElementById("year").value;
   const number = document.getElementById("book_number").value;
   const id = document.getElementById("id").value;
+  const cover = "";
 
   // passing all values to the data object
   const data = {
     title,
     author,
     year,
-    number
+    number,
+    cover
   };
   checkFormValid();
   // prevent to adding empty value to data

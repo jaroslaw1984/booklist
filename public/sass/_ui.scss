@@ -13,18 +13,50 @@ body {
     header {
       border-bottom: 1px solid gray;
       margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      height: 90px;
+      @include desktop_small {
+        flex-direction: row;
+        align-items: center;
+        height: 70px;
+      }
       // header title
       & h1 {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         color: colors(header_page);
-        margin: 0 0 25px 25px;
-        padding-top: 10px;
+        margin: 10px 10px 5px 10px;
         text-transform: uppercase;
         @include desktop_small {
           font-size: 1.5rem;
         }
         @include desktop_medium {
           font-size: 1.8rem;
+        }
+      }
+      // select list box (sort)
+      select#sort {
+        background: transparent;
+        width: 150px;
+        height: 30px;
+        padding: 5px;
+        margin: 8px 10px;
+        font-size: 0.8rem;
+        line-height: 1px;
+        color: colors(sort_option_text);
+        text-align: center;
+        border: 2px solid colors(sort_option_border);
+        border-radius: 2px;
+        -webkit-appearance: none;
+        @include desktop_medium {
+          width: 200px;
+          height: 34px;
+          font-size: 1rem;
+          cursor: pointer;
+          &:hover {
+            color: colors(sort_option_text_hover);
+          }
         }
       }
     }
@@ -52,7 +84,6 @@ body {
         }
         margin-top: 20px;
         .content__body {
-          height: auto;
           display: flex;
           border: config(book_border) solid colors(border);
           border-radius: 10px;
@@ -66,13 +97,14 @@ body {
             align-items: center;
             justify-content: center;
             margin: 10px;
-            width: 80%;
+            width: 100%;
+            height: 100%;
             @include desktop_larger {
-              flex-direction: column;
               align-self: center;
             }
             .image {
               width: 100%;
+              height: 100%;
               @include desktop_large {
                 max-width: 350px;
               }
@@ -183,14 +215,28 @@ body {
   // footer
   footer {
     width: 100%;
+    height: 100px;
     text-align: center;
     margin-top: 30px;
-    padding: 3px;
     background-color: colors(footer_background);
     border-top: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     & p {
-      color: colors(footer_color_text);
-      padding: 5px;
+      color: colors(footer_color_name);
+      padding: 10px 0;
+    }
+    & p > a {
+      text-decoration: none;
+      color: colors(footer_color_portfolio);
+      @include desktop_small {
+        transition: all 0.3s ease;
+        &:hover {
+          font-size: 17px;
+          color: colors(footer_color_portfolio_hover);
+        }
+      }
     }
     & p:first-child {
       font-weight: bold;

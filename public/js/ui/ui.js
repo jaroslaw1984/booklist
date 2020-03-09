@@ -1,5 +1,5 @@
 "use strict";
-import img from "../../assets/image/no_image.png";
+import no_img from "../../assets/image/no_image.png";
 
 export default class Form {
   constructor() {
@@ -13,11 +13,35 @@ export default class Form {
     this.idInput = document.getElementById("id");
     this.wrapper = document.querySelector(".wrapper");
     this.formTitle = document.querySelector(".book__form__header");
+    this.sort = document.getElementById("sort");
   }
   showBooks(books) {
-    // clean inline styles when styles are added if all data from db.json will be delete.
+    // remove the inline styles that were added when no data was available in db.json
     this.bookList.style.cssText = null;
 
+    // get a value option that is selected
+    const sortValue = this.sort.options[this.sort.selectedIndex].value;
+
+    // sort data if one of the selected option is active
+    if (sortValue === "sortByYear") {
+      books.sort((a, b) => b.year - a.year);
+    } else if (sortValue === "sortByTitle") {
+      books.sort((a, b) => {
+        const nameA = a.title.toUpperCase();
+        const nameB = b.title.toUpperCase();
+
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+
+        return 0;
+      });
+    }
+
+    // put all books
     let list = "";
 
     books.forEach(book => {
@@ -25,7 +49,9 @@ export default class Form {
       <div class="content">
         <div class="content__body">
           <div class="content__body__image">
-            <img srcset="${img} 1x" class="image">
+            <img srcset="${
+              book.cover === "" ? no_img : book.cover
+            } 1x" class="image">
           </div>
           <div class="content__body__text">
             <h1 class="title">${book.title}</h1>

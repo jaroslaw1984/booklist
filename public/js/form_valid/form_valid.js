@@ -53,8 +53,6 @@ export default class Validate {
       isbnValid = true;
     }
 
-    console.log(titleValid, authorValid, yearValid, isbnValid);
-
     function validateTitle() {
       const validTitle = document.getElementById("validTitle");
 
