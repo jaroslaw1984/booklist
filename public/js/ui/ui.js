@@ -14,6 +14,7 @@ export default class Form {
     this.wrapper = document.querySelector(".wrapper");
     this.formTitle = document.querySelector(".book__form__header");
     this.sort = document.getElementById("sort");
+    this.searchBar = document.getElementById("searchBar__input");
   }
   showBooks(books) {
     // remove the inline styles that were added when no data was available in db.json
@@ -48,7 +49,7 @@ export default class Form {
       list += `
       <div class="content">
         <div class="content__body">
-          <div class="content__body__image">
+          <div class="content__body__image" title="${book.title}">
             <img srcset="${
               book.cover === "" ? no_img : book.cover
             } 1x" class="image">

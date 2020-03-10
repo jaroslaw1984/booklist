@@ -50,6 +50,10 @@ const localhost = "http://localhost:3000/books";
   sort.addEventListener("change", () => {
     getBooks();
   });
+
+  // search bar
+  const searchBar = document.getElementById("searchBar__input");
+  searchBar.addEventListener("input", searchBook);
 })();
 
 // show form to add a new book by pressing plus
@@ -277,5 +281,25 @@ function cancelEdit(e) {
     ui.changeState("add");
     ui.alerts("Editing was cancel", "attention");
     // ui.closeForm("cancel");
+  }
+}
+
+// search bar
+function searchBook(e) {
+  const inputText = e.target.value.toLowerCase();
+  const getAllBooks = document.querySelectorAll(".content");
+
+  for (let i = 0; i < getAllBooks.length; i++) {
+    if (
+      !getAllBooks[
+        i
+      ].firstElementChild.lastElementChild.firstElementChild.firstChild.nodeValue
+        .toLowerCase()
+        .includes(inputText)
+    ) {
+      getAllBooks[i].style.display = "none";
+    } else {
+      getAllBooks[i].style.display = "flex";
+    }
   }
 }
