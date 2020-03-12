@@ -12,7 +12,7 @@
       "title": "Elevation",
       "author": "Stephen King",
       "year": "2018",
-      "number": "3",
+      "number": "2",
       "cover": "../assets/image/Elevation.jpg",
       "id": 2
     },
@@ -27,10 +27,26 @@
     {
       "title": "If It Bleeds",
       "author": "Stephen King",
-      "year": "2020",
-      "number": "3",
+      "year": "2019",
+      "number": "4",
       "cover": "../assets/image/If_It_Bleeds.jpg",
       "id": 4
+    },
+    {
+      "title": "Javascript books for beginners",
+      "author": "Bernie Rogers",
+      "year": "2020",
+      "number": "5",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/418bqmx%2B2wL.jpg",
+      "id": 5
+    },
+    {
+      "title": "Where the Crawdads Sing",
+      "author": "Delia Owens",
+      "year": "2018",
+      "number": "6",
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/81WWiiLgEyL.jpg",
+      "id": 6
     }
   ]
 }

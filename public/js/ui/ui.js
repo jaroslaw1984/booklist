@@ -8,6 +8,7 @@ export default class Form {
     this.authorInput = document.getElementById("author");
     this.yearInput = document.getElementById("year");
     this.numberInput = document.getElementById("book_number");
+    this.cover = document.getElementById("book_link");
     this.submitBtn = document.querySelector(".submit_btn");
     this.alert = document.querySelector(".alert");
     this.idInput = document.getElementById("id");
@@ -52,7 +53,7 @@ export default class Form {
           <div class="content__body__image" title="${book.title}">
             <img srcset="${
               book.cover === "" ? no_img : book.cover
-            } 1x" class="image">
+            }" class="image">
           </div>
           <div class="content__body__text">
             <h1 class="title">${book.title}</h1>
@@ -116,6 +117,7 @@ export default class Form {
     this.authorInput.value = "";
     this.yearInput.value = "";
     this.numberInput.value = "";
+    this.cover.value = "";
   }
 
   // clear hidden input field
@@ -157,6 +159,7 @@ export default class Form {
     this.authorInput.value = data.author;
     this.yearInput.value = data.year;
     this.numberInput.value = data.isbn;
+    this.cover.value = data.link;
     this.idInput.value = data.dataId;
 
     // initial method with attribute "edit" that will create cancel btn and change button value.

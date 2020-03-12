@@ -7,6 +7,7 @@ export default class Validate {
     this.author = document.getElementById("author");
     this.year = document.getElementById("year");
     this.number = document.getElementById("book_number");
+    this.cover = document.getElementById("book_link");
     this.submitBtn = document.querySelector(".submit_btn");
 
     // select warning fileds
@@ -14,6 +15,7 @@ export default class Validate {
     this.validAuthor = document.getElementById("validAuthor");
     this.validYear = document.getElementById("validYear");
     this.validIsbn = document.getElementById("validIsbn");
+    this.validLink = document.getElementById("validLink");
 
     // select form container
     this.wrapper = document.querySelector(".wrapper");
@@ -32,32 +34,35 @@ export default class Validate {
     const submitBtn = this.submitBtn;
     const year = this.year;
     const isbn = this.number;
-    const wrapper = this.wrapper;
+    const link = this.cover;
 
     // listeners on inputs
     this.title.addEventListener("input", validateTitle);
     this.author.addEventListener("input", validateAuthor);
     this.year.addEventListener("input", validateYear);
     this.number.addEventListener("input", validateIsbn);
+    this.cover.addEventListener("input", validateLink);
 
     // check if all inputs are correct filled
     let titleValid = false;
     let authorValid = false;
     let yearValid = false;
     let isbnValid = false;
+    let linkValid = false;
 
     if (this.wrapper.classList.contains("edit")) {
       titleValid = true;
       authorValid = true;
       yearValid = true;
       isbnValid = true;
+      linkValid = true;
     }
 
     function validateTitle() {
       const validTitle = document.getElementById("validTitle");
 
       // regular expresion validation
-      if (!/^[a-zA-Z]{2,}/.test(title.value)) {
+      if (title.value && !/^[a-zA-Z]{2,}/.test(title.value)) {
         // check if any number are typed
         if (/\d/.test(title.value)) {
           validTitle.innerHTML = "The numbers are not allowed here.";
@@ -85,7 +90,7 @@ export default class Validate {
     function validateAuthor() {
       const validAuthor = document.getElementById("validAuthor");
 
-      if (!/^[a-zA-Z]{2,}/.test(author.value)) {
+      if (author.value && !/^[a-zA-Z]{2,}/.test(author.value)) {
         if (/\d/.test(author.value)) {
           validAuthor.innerHTML = "The numbers are not allowed here.";
           submitBtn.disabled = true;
@@ -112,7 +117,7 @@ export default class Validate {
     function validateYear() {
       const validYear = document.getElementById("validYear");
 
-      if (!/^[0-9]{1,4}$/.test(year.value)) {
+      if (year.value && !/^[0-9]{1,4}$/.test(year.value)) {
         if (/^[a-zA-Z]/.test(year.value)) {
           validYear.innerHTML = "Letters are not allowed here.";
           submitBtn.disabled = true;
@@ -138,7 +143,7 @@ export default class Validate {
     function validateIsbn() {
       const validIsbn = document.getElementById("validIsbn");
 
-      if (!/^[0-9]{1,}$/.test(isbn.value)) {
+      if (isbn.value && !/^[0-9]{1,}$/.test(isbn.value)) {
         if (/^[a-zA-Z]/.test(isbn.value)) {
           validIsbn.innerHTML = "Letters are not allowed here.";
           submitBtn.disabled = true;
@@ -161,8 +166,27 @@ export default class Validate {
       }
     }
 
+    function validateLink() {
+      const validLink = document.getElementById("validLink");
+
+      if (link.value && !/^https?:\/\/[\w.\/]+/i.test(link.value)) {
+        validLink.innerHTML =
+          "The link should start with 'http://...' , 'https://...' or leave the field empty.";
+        submitBtn.disabled = true;
+        submitBtn.classList.add("disabled");
+        linkValid = false;
+        return false;
+      } else {
+        validLink.innerHTML = "";
+        submitBtn.classList.remove("disabled");
+        submitBtn.disabled = false;
+        linkValid = true;
+        checkFields();
+      }
+    }
+
     function checkFields() {
-      if (titleValid && authorValid && yearValid && isbnValid) {
+      if (titleValid && authorValid && yearValid && isbnValid && linkValid) {
         submitBtn.disabled = false;
         submitBtn.classList.remove("disabled");
         console.log(titleValid, authorValid, yearValid, isbnValid);
@@ -174,6 +198,7 @@ export default class Validate {
     this.validAuthor.innerHTML = "";
     this.validYear.innerHTML = "";
     this.validIsbn.innerHTML = "";
+    this.validLink.innerHTML = "";
     this.submitBtn.classList.remove("disabled");
     this.submitBtn.disabled = false;
   }

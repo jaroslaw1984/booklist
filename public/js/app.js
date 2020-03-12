@@ -128,7 +128,7 @@ function addBook(e) {
   const year = document.getElementById("year").value;
   const number = document.getElementById("book_number").value;
   const id = document.getElementById("id").value;
-  const cover = "";
+  const cover = document.getElementById("book_link").value;
 
   // passing all values to the data object
   const data = {
@@ -198,15 +198,17 @@ function deleteBook(e) {
   const dataId = e.target.parentElement.dataset.id;
 
   if (delBtn) {
-    http
-      .del(localhost + "/" + dataId)
-      .then(() => {
-        ui.alerts("You have delete this book!", "success");
-        getBooks();
-      })
-      .catch(error =>
-        throwError(`Something went wrong! \n Error information: ${error}`)
-      );
+    if (confirm("Do you wanna really delete this book ?")) {
+      http
+        .del(localhost + "/" + dataId)
+        .then(() => {
+          ui.alerts("You have delete this book!", "success");
+          getBooks();
+        })
+        .catch(error =>
+          throwError(`Something went wrong! \n Error information: ${error}`)
+        );
+    }
   }
 }
 
@@ -256,14 +258,22 @@ function editBook(e) {
       /\d+/
     );
 
+    // select image link from a HTML
+    const link =
+      e.target.parentElement.parentElement.parentElement.parentElement
+        .firstElementChild.firstElementChild.srcset;
+
     // passing all selected values to a data object
     const data = {
       title,
       author,
       year,
       isbn,
+      link,
       dataId
     };
+
+    console.log(link);
 
     // function that fills the fields in form, from data object
     ui.getData(data);

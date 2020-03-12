@@ -71,7 +71,8 @@ section {
   .book__form__title,
   .book__form__author,
   .book__form__year,
-  .book__form__isbn {
+  .book__form__isbn,
+  .book__form__link {
     border-bottom: 1px solid colors(input_border);
     margin-bottom: 20px;
     display: table;
