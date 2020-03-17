@@ -14,14 +14,14 @@ This application is created in vanilla javascript using webpack and webpack-dev-
 
 ## Table of contents
 
-_[Installation](#installation)
-_[Start json server](#start-json-server)
-_[Run live server](#run-live-server)
-_[Add a book](#add-a-book)
-_[Edit a book](#edit-a-book)
-_[Delete a book](#delete-a-book)
-_[Application tools](#application-tools)
-_[Inspiration](#inspiration)
+- [Installation](#installation)
+- [Start json server](#start-json-server)
+- [Run live server](#run-live-server)
+- [Add a book](#add-a-book)
+- [Edit a book](#edit-a-book)
+- [Delete a book](#delete-a-book)
+- [Application tools](#application-tools)
+- [Inspiration](#inspiration)
 
 ## Setup
 
@@ -44,7 +44,11 @@ $ npm run json:server
 
 ### Run live server
 
-![#f03c15](Attention!) `#f03c15` Use new tab at console to run live server. Json server need to be run in background.
+```diff
+! Attention
+```
+
+Use new tab at console to run live server. Json server need to be run in background.
 
 At a new tab console remember to change a directory of project path
 
