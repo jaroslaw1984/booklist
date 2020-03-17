@@ -1,4 +1,4 @@
-# BOOK LIST with a fake REST API using JSON Server and Webpack
+# BOOK LIST with REST API using JSON Server and Webpack
 
 With this application we can management a book's that are store in json file as a database. We can add a book by a form, delete or edit from UI.
 
