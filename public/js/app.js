@@ -83,7 +83,7 @@ function showForm() {
         if (cancelBtn) {
           cancelBtn.remove();
           submitBtn.value = "Add Book";
-          ui.alerts("Editing was cancel", "attention");
+          ui.alerts("Editing was canceled", "attention");
         }
       }
     });
@@ -273,8 +273,6 @@ function editBook(e) {
       dataId
     };
 
-    console.log(link);
-
     // function that fills the fields in form, from data object
     ui.getData(data);
 
@@ -289,7 +287,7 @@ function cancelEdit(e) {
   if (e.target.classList.contains("cancel")) {
     // initial method with attribute "add" that will remove cancel btn and change button value to the orginal state also it will clear the fields.
     ui.changeState("add");
-    ui.alerts("Editing was cancel", "attention");
+    ui.alerts("Editing was canceled", "attention");
     // ui.closeForm("cancel");
   }
 }
